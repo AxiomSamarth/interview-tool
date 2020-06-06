@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Index | Prism</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <script src='{{ url_for('static', filename='jquery.min.js') }}'></script>
+    <script src='{{ url_for('static', filename='bootstrap.min.js') }}'></script>
+    <link rel="stylesheet" type="text/css" media="screen" href='{{ url_for('static', filename='bootstrap.css') }}' />
+    <link rel="stylesheet" type="text/css" media="screen" href='{{ url_for('static', filename='indexpage.css') }}' />
+    <link href="https://fonts.googleapis.com/css?family=Dosis|Lato" rel="stylesheet">
+</head>
+<body>
+    <div id="banner">
+        <div class="container">
+            {% if colleges %}
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <form action="{{ url_for('index') }}" method="POST">
+                        <div class="form-group">
+                            <label>Choose college</label>
+                            <select class="form-control" name="college">
+                                <!-- The list of options must be fetched from the database and iterated over -->
+                            {% for college in colleges %}
+                                <option class="form-control" value="{{ college }}">{{ college }}</option>
+                            {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group text-center">
+                            <input type="submit" value="Enter session" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if college %}
+            <div class="row" style="margin-top:4em;">
+                <div class="col-md-8 col-md-offset-2 text-center">
+                    <h3>{{college}}</h3>
+                    <h4 style="margin: 2em 2px;">Performance Summary</h4>
+                </div>
+            </div>
+            <div class="row text-center" style="margin-top: 2em;">
+                <div class="col-md-3 scoreboard">
+                    <h5>Total students</h5>
+                    <p style="font-size: 4em;">{{ scores | length }}</p>
+                </div>
+                <div class="col-md-3 scoreboard">
+                    <h5>Lowest Score</h5>
+                    <p style="font-size: 4em;">{{ (scores | sort)[0] }}</p>
+                </div>
+                <div class="col-md-3 scoreboard">
+                    <h5>Highest Score</h5>
+                    <p style="font-size: 4em;">{{ (scores | sort)[-1] }}</p>
+                </div>
+                <div class="col-md-3 scoreboard" style="box-shadow: None;">
+                    <h5>Average Score</h5>
+                    <p style="font-size: 4em;">{{ ((scores | sum)/(scores | length)) | int }}</p>
+                </div>
+            </div>  
+            <div class="row text-center">
+                <div class="col-md-4 col-md-offset-4" style="margin-top:3em;">
+                    <p>The recommended cutoff is {{ recommended_cutoff }}</p>
+                    <form style="margin-top:0;" action="{{url_for('enter')}}" method="POST">
+                        <div class="form-group">
+                            <label>Do you have your preferred cutoff?</label>
+                            <input type="text" class="form-control" name="cutoff" value="{{ recommended_cutoff }}" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Shortlist" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% endif %}                
+            
+        </div>
+    </div>
+</body>
+</html>

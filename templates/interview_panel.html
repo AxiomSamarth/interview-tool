@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Interview Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <script src='{{ url_for('static', filename='jquery.min.js') }}'></script>
+    <script src='{{ url_for('static', filename='bootstrap.min.js') }}'></script>
+    <link rel="stylesheet" type="text/css" media="screen" href='{{ url_for('static', filename='bootstrap.css') }}' />
+    <link rel="stylesheet" type="text/css" media="screen" href='{{ url_for('static', filename='login.css') }}' />
+    <link href="https://fonts.googleapis.com/css?family=Lato|Dosis" rel="stylesheet">
+</head>
+<body>
+    <div id="banner" style="margin-top: 2em;">
+        <div class="container-fluid">
+            <div class="jumbotron text-center">
+                <h3>Let's begin!</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <form action="{{ url_for('start_session') }}" method="POST">
+                        <div class="form-group">
+                            <label>Type of Interview Round :</label>
+                            <select class="form-control" name="round_type">
+                                <option class="form-control" value="tech">Technical Round</option>
+                                <option class="form-control" value="managerial">Managerial Round</option>
+                                <option class="form-control" value="hr">HR Round</option>
+                            </select>
+                        </div>
+                        <div class="form-group text-center">
+                            <input type="submit" value="Bring In" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    {% for message in get_flashed_messages() %}
+                        <p class="text-center">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

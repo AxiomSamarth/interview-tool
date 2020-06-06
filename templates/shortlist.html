@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Signup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <script src='{{ url_for('static', filename='jquery.min.js') }}'></script>
+    <script src='{{ url_for('static', filename='bootstrap.min.js') }}'></script>
+    <link rel="stylesheet" type="text/css" media="screen" href='{{ url_for('static', filename='bootstrap.css') }}' />
+    <link rel="stylesheet" type="text/css" media="screen" href='{{ url_for('static', filename='login.css') }}' />
+</head>
+<body>
+    <div id="banner">
+        <div class="container">
+            <div class="jumbotron text-center">
+                <h4>Shortlisted candidates from {{ college }}</h4>
+            </div>
+            <div class="table">
+                <table class="table">
+                    <thead>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email Id</th>
+                        <th>Score</th>
+                    </thead>
+                    {% for candidate in shortlisted_candidates %}
+                        <tr>
+                            <td>{{candidate['id']}}</td>
+                            <td>{{candidate['name']}}</td>
+                            <td>{{candidate['email_id']}}</td>
+                            <td>{{candidate['score']}}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <form action="{{url_for('start_session')}}" method="GET">
+                        <div class="form-group">
+                            <center><input type="submit" class="btn btn-primary" value="Start Session" /></center>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

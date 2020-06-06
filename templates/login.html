@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login | Prism</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <script src='{{ url_for('static', filename='jquery.min.js') }}'></script>
+    <script src='{{ url_for('static', filename='bootstrap.min.js') }}'></script>
+    <link rel="stylesheet" type="text/css" media="screen" href='{{ url_for('static', filename='bootstrap.css') }}' />
+    <link rel="stylesheet" type="text/css" media="screen" href='{{ url_for('static', filename='login.css') }}' />
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    
+</head>
+<body>
+    <div id="banner">
+        <div class="container">
+            <div class="jumbotron text-center">
+                <h3>Prism v1.0</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    {% for message in get_flashed_messages() %}
+                        <p class="text-center">{{ message }}</p>
+                    {% endfor %}
+                    <form action="{{ url_for('login') }}" method="POST">
+                        <div class="form-group">
+                            <label>Username *</label>
+                            <input type="email" name="username" id="username" class="form-control" placeholder="teddy.winters@hpe.com" required/>
+                        </div>
+                        <div class="form-group">
+                            <label>Password *</label>
+                            <input type="password" name="password" id="password" class="form-control" required/>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Login" class="btn btn-primary" />
+                            <a href={{url_for('signup')}} class="btn btn-info">Sign up</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2019 All Rights Reserved by Teddy Winters</p>
+    </footer>
+</body>
+</html>

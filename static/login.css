@@ -1,0 +1,26 @@
+html{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: Lato !important;
+}
+
+#banner .container .jumbotron{
+    background-color: transparent;
+    padding: 1em 1em;
+}
+
+
+#banner{
+    position: relative;
+    margin-top: 5%;
+}
+
+footer{
+    position: absolute;
+    width: 100%;
+    bottom: 0;    
+    text-align: center;
+}
